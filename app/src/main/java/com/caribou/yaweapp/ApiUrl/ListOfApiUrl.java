@@ -5,8 +5,8 @@ public class ListOfApiUrl {
 
     // here will be the path of your url route for API
     // EDIT YOURSELF WITH YOUR API URL (or other url)
-    private final static String URL_API_BASE = "";
-    private final static String URL_UPLOAD_PICTURE = "";
+    private final static String URL_API_BASE = "an url to your api";
+    private final static String URL_UPLOAD_PICTURE = "an url to your website";
 
     // and here all the method of all your request API
 
