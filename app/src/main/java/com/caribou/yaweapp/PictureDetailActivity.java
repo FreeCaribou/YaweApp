@@ -281,6 +281,13 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         return true;
     }
 
+    /**
+     * Sets ListView height dynamically based on the height of the items.
+     *
+     * @param listView to be resized
+     * @return true if the listView is successfully resized, false otherwise
+     * src: http://blog.lovelyhq.com/setting-listview-height-depending-on-the-items/
+     */
     public static boolean setListViewHeightBasedOnItems(ListView listView) {
 
         ListAdapter listAdapter = listView.getAdapter();
@@ -313,50 +320,6 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         }
 
     }
-
-
-
-
-//    public final static String APP_PATH_SD_CARD = "/YaweApp/";
-//
-//    public boolean saveImageToExternalStorage(Bitmap image) {
-//        Toast.makeText(this, "Begin downloading", Toast.LENGTH_SHORT).show();
-//        Log.i("sbire: ", "debut download");
-//        String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath() + APP_PATH_SD_CARD ;//+ APP_THUMBNAIL_PATH_SD_CARD;
-//        Log.i("sbire: ", "chemin acces");
-//        try {
-//            File dir = new File(fullPath);
-//            if (!dir.exists()) {
-//                dir.mkdir();
-//            }
-//
-//            if (!dir.exists()) {
-//                dir.mkdirs();
-//            }
-//
-//            String nameFile = imgUrl.substring(imgUrl.lastIndexOf("/") + 1);
-//            Log.i("nom fichier: ", nameFile);
-//
-//            OutputStream fOut = null;
-//            File file = new File(fullPath, nameFile);
-//            file.createNewFile();
-//            fOut = new FileOutputStream(file);
-//
-//            // 100 means no compression, the lower you go, the stronger the compression
-//            image.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-//            fOut.flush();
-//            fOut.close();
-//            MediaStore.Images.Media.insertImage(this.getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
-//            Toast.makeText(PictureDetailActivity.this, "Picture download in YaweApp folder", Toast.LENGTH_SHORT).show();
-//            return true;
-//
-//        } catch (Exception e) {
-//            Log.e("saveToExternalStorage()", e.getMessage());
-//            return false;
-//        }
-//    }
-
-
 
     @Override
     protected void onRestart() {
@@ -403,4 +366,43 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         }
 
     }
+
+    //    public final static String APP_PATH_SD_CARD = "/YaweApp/";
+//
+//    public boolean saveImageToExternalStorage(Bitmap image) {
+//        Toast.makeText(this, "Begin downloading", Toast.LENGTH_SHORT).show();
+//        Log.i("sbire: ", "debut download");
+//        String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath() + APP_PATH_SD_CARD ;//+ APP_THUMBNAIL_PATH_SD_CARD;
+//        Log.i("sbire: ", "chemin acces");
+//        try {
+//            File dir = new File(fullPath);
+//            if (!dir.exists()) {
+//                dir.mkdir();
+//            }
+//
+//            if (!dir.exists()) {
+//                dir.mkdirs();
+//            }
+//
+//            String nameFile = imgUrl.substring(imgUrl.lastIndexOf("/") + 1);
+//            Log.i("nom fichier: ", nameFile);
+//
+//            OutputStream fOut = null;
+//            File file = new File(fullPath, nameFile);
+//            file.createNewFile();
+//            fOut = new FileOutputStream(file);
+//
+//            // 100 means no compression, the lower you go, the stronger the compression
+//            image.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+//            fOut.flush();
+//            fOut.close();
+//            MediaStore.Images.Media.insertImage(this.getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
+//            Toast.makeText(PictureDetailActivity.this, "Picture download in YaweApp folder", Toast.LENGTH_SHORT).show();
+//            return true;
+//
+//        } catch (Exception e) {
+//            Log.e("saveToExternalStorage()", e.getMessage());
+//            return false;
+//        }
+//    }
 }
