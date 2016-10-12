@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.caribou.yaweapp.MemberDetailActivity;
 import com.caribou.yaweapp.R;
 import com.caribou.yaweapp.UserDetailActivity;
 import com.caribou.yaweapp.model.User;
@@ -36,9 +37,8 @@ public class MemberArrayAdapter extends ArrayAdapter<UserDetail> {
         ImageView tvRace = (ImageView) convertView.findViewById(R.id.tv_memberItem_race);
         ImageView tvProfession = (ImageView) convertView.findViewById(R.id.tv_memberItem_profession);
 
-        // TODO mettre race et profession avec image
         tvName.setText(u.getAuthorName());
-        String race = u.getFavoriteRace();
+        final String race = u.getFavoriteRace();
         switch (race){
             case "Charr":
                 tvRace.setImageResource(R.drawable.charr_icon);
@@ -57,7 +57,7 @@ public class MemberArrayAdapter extends ArrayAdapter<UserDetail> {
                 break;
 
         }
-        String profession = u.getFavoriteProfession();
+        final String profession = u.getFavoriteProfession();
         switch (profession) {
             case "Mesmer":
                 tvProfession.setImageResource(R.drawable.mesmer_icon);
@@ -89,6 +89,21 @@ public class MemberArrayAdapter extends ArrayAdapter<UserDetail> {
             default:
                 break;
         }
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToDetail = new Intent(getContext(), MemberDetailActivity.class);
+                goToDetail.putExtra("race", race);
+                goToDetail.putExtra("profession", profession);
+                goToDetail.putExtra("id", u.getId());
+                goToDetail.putExtra("mood", u.getMood());
+                goToDetail.putExtra("gameplay_style", u.getGamePlayStyle());
+                goToDetail.putExtra("activity", u.getFavoriteActiviy());
+                goToDetail.putExtra("name", u.getAuthorName());
+                getContext().startActivity(goToDetail);
+            }
+        });
 
         // Return the completed view to render on screen
         return convertView;

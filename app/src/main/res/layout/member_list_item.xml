@@ -9,13 +9,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_memberItem_name"
         android:text="Name"
-        style="@style/H3"
+        style="@style/H2"
+        android:layout_marginBottom="5dp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
 
         <!-- TODO mettre des images à la place du texte pour représenter race et classe -->
 
@@ -26,6 +28,7 @@
             android:text="Race"
             android:layout_weight="1"
             android:gravity="center"
+            android:src="@drawable/gw2_icon"
             />
 
         <ImageView
@@ -35,6 +38,7 @@
             android:text="Profession"
             android:gravity="center"
             android:layout_weight="1"
+            android:src="@drawable/gw2_icon"
             />
 
     </LinearLayout>
