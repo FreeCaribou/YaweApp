@@ -96,8 +96,6 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         btComment = (Button) findViewById(R.id.bt_pictureDetail_comment);
         ll = (LinearLayout) findViewById(R.id.ll_pictureDetail);
 
-
-
         lvComment.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
