@@ -102,6 +102,7 @@
             android:id="@+id/lv_commentPicture"
             android:layout_gravity="top"
             android:layout_marginBottom="10dp"
+            android:paddingBottom="10dp"
             >
         </ListView>
 
