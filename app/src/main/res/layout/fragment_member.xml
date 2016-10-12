@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="55dp"
+    android:background="@color/colorPrimary"
+    tools:context="com.caribou.yaweapp.fragment.MemberFragment">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffff"
+        android:id="@+id/lv_member_list"
+        >
+    </ListView>
+
+</LinearLayout>

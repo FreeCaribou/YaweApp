@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context="com.caribou.yaweapp.MyAccountActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_account_name"
+            style="@style/H2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/welcome_to_your_account" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="25dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main roll race:"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/sp_account_race"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main roll profession:"
+            android:textSize="12sp" />
+
+        <Spinner
+            android:id="@+id/sp_account_profession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main roll gameplay style:"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/ed_account_gameplay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Your main roll gameplay style" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favorite Activity in GW2:"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/ed_account_activity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Your favorite activity in GW2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My mood of the moment:"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/ed_account_mood"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="What is your mood?" />
+
+        <Button
+            android:id="@+id/bt_account_updateDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Update my detail" />
+
+
+        <EditText
+            android:id="@+id/ed_account_newPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/new_password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/ed_account_ConfirmNewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/confirm_new_password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/bt_account_changePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_password" />
+
+
+    </LinearLayout>
+
+</ScrollView>

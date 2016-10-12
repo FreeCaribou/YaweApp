@@ -1,0 +1,53 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ac1111</item>
+        <item name="colorPrimaryDark">#1e0101</item>
+        <item name="colorAccent">#000000</item>
+    </style>
+
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+
+    </style>
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyMaterialTheme.BaseHeretic" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimaryHeretic</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkHeretic</item>
+        <item name="colorAccent">@color/colorAccentHeretic</item>
+    </style>
+
+    <style name="H1">
+        <item name="android:textSize">40dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="H2">
+        <item name="android:textSize">30dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="H3">
+        <item name="android:textSize">25dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="H4">
+        <item name="android:textSize">20dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+</resources>

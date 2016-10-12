@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ac1111</color>
+    <color name="colorPrimaryDark">#560505</color>
+    <color name="colorAccent">#000000</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+
+    <color name="colorPrimaryHeretic">#ff00ea</color>
+    <color name="colorPrimaryDarkHeretic">#9c11ec</color>
+    <color name="colorAccentHeretic">#7bff00</color>
+    <color name="colorBackgroundHeretic">#049f3a</color>
+
+</resources>
