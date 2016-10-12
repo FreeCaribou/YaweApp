@@ -151,9 +151,10 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
                     // TODO stopper le refresh en sortant de la partie tchat
                 }
             };
-
             timer.scheduleAtFixedRate(tt,5000,2500);  // Delay 5 seconds on the first run
             // then run every 5 second
+        } else {
+
         }
     }
 
