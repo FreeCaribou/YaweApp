@@ -45,6 +45,7 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
     ListView lvChatMessage;
     ArrayList<ChatMessage> listMessage;
     Timer timer;
+    TimerTask tt;
 
 
 
@@ -101,22 +102,6 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
         });
         registerForContextMenu(lvChatMessage);
 
-        timer = new Timer();
-        TimerTask tt = new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                updateListView();
-                Log.i("sbire: ", "je refresh");
-                // TODO stopper le refresh en sortant de la partie tchat
-            }
-        };
-
-        timer.scheduleAtFixedRate(tt,5000,5000);  // Delay 5 seconds on the first run
-        // then run every 5 second
-
-
 
 
         return v;
@@ -127,7 +112,20 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
         super.onStop();
         timer.cancel();
         // don't need to refresh the chat if we close the fragment
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        timer.cancel();
+        // don't need to refresh the chat if we close the fragment
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        timer.cancel();
+        // don't need to refresh the chat if we close the fragment
     }
 
     private void updateListView(){
@@ -141,6 +139,21 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
         if(isVisibleToUser){
             // pour afficher des trucs seulement quand on rentre dans l'onglet
             updateListView();
+
+            timer = new Timer();
+            tt = new TimerTask()
+            {
+                @Override
+                public void run()
+                {
+                    updateListView();
+                    Log.i("sbire: ", "je refresh");
+                    // TODO stopper le refresh en sortant de la partie tchat
+                }
+            };
+
+            timer.scheduleAtFixedRate(tt,5000,2500);  // Delay 5 seconds on the first run
+            // then run every 5 second
         }
     }
 
