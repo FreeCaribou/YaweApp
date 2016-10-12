@@ -99,7 +99,6 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         lvComment.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-
                 view.getParent().requestDisallowInterceptTouchEvent(true);
                 return false;
             }
