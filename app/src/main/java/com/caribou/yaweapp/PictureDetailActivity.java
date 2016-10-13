@@ -96,13 +96,13 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         btComment = (Button) findViewById(R.id.bt_pictureDetail_comment);
         ll = (LinearLayout) findViewById(R.id.ll_pictureDetail);
 
-        lvComment.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                view.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
+//        lvComment.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                view.getParent().requestDisallowInterceptTouchEvent(true);
+//                return false;
+//            }
+//        });
 
         final Bundle extra = this.getIntent().getExtras();
         if(extra != null){

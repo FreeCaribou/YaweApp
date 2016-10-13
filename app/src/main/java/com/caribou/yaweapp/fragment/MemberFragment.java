@@ -3,6 +3,7 @@ package com.caribou.yaweapp.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,15 @@ public class MemberFragment extends Fragment implements GetAsyncTask.GetAsyncTas
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
             updateListView();
+            Log.i("sbire:","on me voit");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateListView();
+        Log.i("sbire","on resume");
     }
 
     @Override

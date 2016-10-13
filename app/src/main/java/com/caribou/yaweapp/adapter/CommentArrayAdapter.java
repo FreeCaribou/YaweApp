@@ -4,6 +4,7 @@ package com.caribou.yaweapp.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +28,12 @@ public class CommentArrayAdapter extends ArrayAdapter<CommentPicture> implements
 
     String author;
     TextView tvAuthor;
+    int listSize;
 
     public CommentArrayAdapter(Context context, ArrayList<CommentPicture> commentPictures) {
         super(context, 0, commentPictures);
+        listSize = commentPictures.size();
+        Log.i("size:", String.valueOf(listSize));
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -37,6 +41,8 @@ public class CommentArrayAdapter extends ArrayAdapter<CommentPicture> implements
 
         // Get the data item for this position
         final CommentPicture cp = getItem(position);
+        Log.i("position: ", String.valueOf(position));
+
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.comment_list_item, parent, false);
@@ -60,7 +66,9 @@ public class CommentArrayAdapter extends ArrayAdapter<CommentPicture> implements
         tvDate.setText(date);
         tvHour.setText(hour);
 
-
+        if((position + 1) == listSize){
+            convertView.setPadding(0,0,0,50);
+        }
 
         // Return the completed view to render on screen
         return convertView;

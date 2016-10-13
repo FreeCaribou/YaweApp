@@ -102,31 +102,9 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
         });
         registerForContextMenu(lvChatMessage);
 
-
-
         return v;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        timer.cancel();
-        // don't need to refresh the chat if we close the fragment
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        timer.cancel();
-        // don't need to refresh the chat if we close the fragment
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        timer.cancel();
-        // don't need to refresh the chat if we close the fragment
-    }
 
     private void updateListView(){
         GetAsyncTask task = new GetAsyncTask(ChatFragment.this);
@@ -136,11 +114,12 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+
         if(isVisibleToUser){
+            timer = new Timer();
             // pour afficher des trucs seulement quand on rentre dans l'onglet
             updateListView();
 
-            timer = new Timer();
             tt = new TimerTask()
             {
                 @Override
@@ -154,7 +133,14 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
             timer.scheduleAtFixedRate(tt,5000,2500);  // Delay 5 seconds on the first run
             // then run every 5 second
         } else {
-
+            Log.i("sbire:" , "setuservisibilityoff");
+            if(timer != null){
+                timer.cancel();
+                timer.purge();
+                timer = null;
+                Log.i("sbire:","timer pas null");
+            }
+                Log.i("sbire:","timer null");
         }
     }
 
