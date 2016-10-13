@@ -1,41 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="10dp"
-        >
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Author"
-            android:textStyle="bold"
-            android:id="@+id/tv_tweetItem_author"
-            android:layout_marginRight="10dp"
-            />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/tv_tweetItem_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Author"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tweetItem_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Post Date" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_tweetItem_tweet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingBottom="5dp"
+                android:text="Tweet" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Post Date"
-            android:id="@+id/tv_tweetItem_date"
+            android:id="@+id/bt_tweetItem_response"
+            android:layout_gravity="center"
+            android:text="Response"
+            android:layout_weight="3"
             />
 
     </LinearLayout>
 
-    <TextView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tweet"
-        android:id="@+id/tv_tweetItem_tweet"
-        android:gravity="left"
-        android:paddingBottom="5dp"
-        />
+        android:id="@+id/lv_tweetItem_responseTweet"
+        >
+    </ListView>
+
 
 </LinearLayout>
