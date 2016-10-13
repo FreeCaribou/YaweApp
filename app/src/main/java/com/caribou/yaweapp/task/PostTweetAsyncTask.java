@@ -1,11 +1,12 @@
 package com.caribou.yaweapp.task;
 
+
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.caribou.yaweapp.ApiUrl.ListOfApiUrl;
 import com.caribou.yaweapp.model.ChatMessage;
-import com.caribou.yaweapp.model.CommentPicture;
+import com.caribou.yaweapp.model.Tweet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,28 +22,29 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+public class PostTweetAsyncTask extends AsyncTask<Tweet,String,String>{
 
-public class PostChatMessageAsyncTask extends AsyncTask<ChatMessage, String, String> {
 
-    protected String doInBackground(ChatMessage... chatMessages) {
-        ChatMessage cm = chatMessages[0];
+    @Override
+    protected String doInBackground(Tweet... params) {
+        Tweet t = params[0];
 
         InputStream inputStream = null;
         String result = "";
 
-        String urlString = ListOfApiUrl.getUrlAddChatMessage();
+        String urlString = ListOfApiUrl.getUrlAddTweet();
         Log.i("url: ", urlString);
         String message = "";
         JSONObject jo = new JSONObject();
         try {
 
-            Date dt = new Date(cm.getPostDate().getTime());
+            Date dt = new Date(t.getPostDate().getTime());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String curentTime = sdf.format(dt);
 
 
-            jo.accumulate("text", cm.getText());
-            jo.accumulate("id_user", cm.getId_user());
+            jo.accumulate("tweet", t.getTweet());
+            jo.accumulate("id_user", t.getId_user());
             jo.accumulate("postDate", curentTime);
 
             message = jo.toString();
@@ -85,5 +87,4 @@ public class PostChatMessageAsyncTask extends AsyncTask<ChatMessage, String, Str
         }
         return null;
     }
-
 }

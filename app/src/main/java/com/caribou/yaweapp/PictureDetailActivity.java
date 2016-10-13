@@ -96,14 +96,6 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         btComment = (Button) findViewById(R.id.bt_pictureDetail_comment);
         ll = (LinearLayout) findViewById(R.id.ll_pictureDetail);
 
-//        lvComment.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                view.getParent().requestDisallowInterceptTouchEvent(true);
-//                return false;
-//            }
-//        });
-
         final Bundle extra = this.getIntent().getExtras();
         if(extra != null){
             id = extra.getLong("id_picture");
@@ -263,12 +255,9 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
      * src: http://blog.lovelyhq.com/setting-listview-height-depending-on-the-items/
      */
     public static boolean setListViewHeightBasedOnItems(ListView listView) {
-
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter != null) {
-
             int numberOfItems = listAdapter.getCount();
-
             // Get total height of all items.
             int totalItemsHeight = 0;
             for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
@@ -276,23 +265,18 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
                 item.measure(0, 0);
                 totalItemsHeight += item.getMeasuredHeight();
             }
-
             // Get total height of all item dividers.
             int totalDividersHeight = listView.getDividerHeight() *
                     (numberOfItems - 1);
-
             // Set list height.
             ViewGroup.LayoutParams params = listView.getLayoutParams();
             params.height = totalItemsHeight + totalDividersHeight;
             listView.setLayoutParams(params);
             listView.requestLayout();
-
             return true;
-
         } else {
             return false;
         }
-
     }
 
     @Override

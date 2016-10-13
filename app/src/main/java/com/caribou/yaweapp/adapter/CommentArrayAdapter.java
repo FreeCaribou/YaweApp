@@ -33,7 +33,6 @@ public class CommentArrayAdapter extends ArrayAdapter<CommentPicture> implements
     public CommentArrayAdapter(Context context, ArrayList<CommentPicture> commentPictures) {
         super(context, 0, commentPictures);
         listSize = commentPictures.size();
-        Log.i("size:", String.valueOf(listSize));
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -68,6 +67,7 @@ public class CommentArrayAdapter extends ArrayAdapter<CommentPicture> implements
 
         if((position + 1) == listSize){
             convertView.setPadding(0,0,0,50);
+            Log.i("sbire:", "j'aggrandi mle dernier");
         }
 
         // Return the completed view to render on screen

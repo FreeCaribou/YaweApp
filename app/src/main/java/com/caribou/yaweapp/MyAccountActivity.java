@@ -19,9 +19,11 @@ import android.widget.Toast;
 import com.caribou.yaweapp.ApiUrl.ListOfApiUrl;
 import com.caribou.yaweapp.adapter.SpinnerAdapter;
 import com.caribou.yaweapp.model.ItemData;
+import com.caribou.yaweapp.model.Tweet;
 import com.caribou.yaweapp.model.User;
 import com.caribou.yaweapp.model.UserDetail;
 import com.caribou.yaweapp.task.GetAsyncTask;
+import com.caribou.yaweapp.task.PostTweetAsyncTask;
 import com.caribou.yaweapp.task.UpdateUserDetailAsyncTask;
 import com.caribou.yaweapp.task.UpdateUserPasswordAsyncTask;
 
@@ -29,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MyAccountActivity extends AppCompatActivity implements GetAsyncTask.GetAsyncTaskCallback {
@@ -45,6 +48,8 @@ public class MyAccountActivity extends AppCompatActivity implements GetAsyncTask
     Button btUpdate;
     Spinner spRace;
     Spinner spProfession;
+    EditText edTweet;
+    Button btTweet;
     long id;
 
     @Override
@@ -176,6 +181,30 @@ public class MyAccountActivity extends AppCompatActivity implements GetAsyncTask
                 task.execute(ud);
 
                 finish();
+            }
+        });
+
+        edTweet = (EditText) findViewById(R.id.ed_account_tweet);
+        btTweet = (Button) findViewById(R.id.bt_account_tweet);
+
+        btTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tweet = edTweet.getText().toString();
+                if (tweet.equals("")){
+                    Toast.makeText(MyAccountActivity.this, R.string.tweet_empty, Toast.LENGTH_SHORT).show();
+                } else if (tweet.length() > 140){
+                    Toast.makeText(MyAccountActivity.this, R.string.max_140, Toast.LENGTH_SHORT).show();
+                } else {
+                    Tweet t = new Tweet();
+                    t.setId_user(id);
+                    t.setPostDate(Calendar.getInstance().getTime());
+                    t.setTweet(tweet);
+                    PostTweetAsyncTask task = new PostTweetAsyncTask();
+                    task.execute(t);
+                    finish();
+                    Toast.makeText(MyAccountActivity.this, "Tweet posted!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

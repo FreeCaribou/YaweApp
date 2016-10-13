@@ -126,21 +126,17 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
                 public void run()
                 {
                     updateListView();
-                    Log.i("sbire: ", "je refresh");
-                    // TODO stopper le refresh en sortant de la partie tchat
+                    // TODO refresh only if there are something new
                 }
             };
-            timer.scheduleAtFixedRate(tt,5000,2500);  // Delay 5 seconds on the first run
-            // then run every 5 second
+            timer.scheduleAtFixedRate(tt,10000,10000);
+            // then run every 10 second
         } else {
-            Log.i("sbire:" , "setuservisibilityoff");
             if(timer != null){
                 timer.cancel();
                 timer.purge();
                 timer = null;
-                Log.i("sbire:","timer pas null");
             }
-                Log.i("sbire:","timer null");
         }
     }
 
