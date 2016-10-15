@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTask.GetAsyncTaskCallback{
+public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTask.GetAsyncTaskCallback {
 
     int listSize;
     TextView tvAuthor;
@@ -47,17 +49,15 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
     TextView tvDate;
     Button btTweetResponse;
     String newTweet;
-    ListView lvResponseTweet;
-    ArrayList<TweetResponse> listResponseTweet;
-    Activity activity;
+    LinearLayout llTweet;
 
     public TweetArrayAdapter(Context context, ArrayList<Tweet> tweets, Activity activity) {
         super(context, 0, tweets);
         listSize = tweets.size();
-        this.activity = activity;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
+
 
         // Get the data item for this position
         final Tweet t = getItem(position);
@@ -66,14 +66,6 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.tweet_list_item, parent, false);
         }
         // Lookup view for data population
-        lvResponseTweet = (ListView) convertView.findViewById(R.id.lv_tweetItem_responseTweet);
-        listResponseTweet = new ArrayList<>();
-
-        activity.registerForContextMenu(lvResponseTweet);
-
-        GetAsyncTask task = new GetAsyncTask(TweetArrayAdapter.this);
-        task.execute(ListOfApiUrl.getUrlAllTweetResponseByIdCore(String.valueOf(t.getId())));
-
         btTweetResponse = (Button) convertView.findViewById(R.id.bt_tweetItem_response);
         tvAuthor = (TextView) convertView.findViewById(R.id.tv_tweetItem_author);
         tvAuthor.setText(t.getAuthor());
@@ -86,9 +78,9 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
         SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
         String date = sdfDate.format(t.getPostDate());
         tvDate.setText(date);
-        if((position + 1) == listSize){
-            convertView.setPadding(0,0,0,80);
-            tvTweet.setPadding(0,0,0,50);
+        if ((position + 1) == listSize) {
+            convertView.setPadding(0, 0, 0, 100);
+            tvTweet.setPadding(0, 0, 0, 100);
             Log.i("sbire:", "j'aggrandi mle dernier");
         }
 
@@ -139,6 +131,26 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
             }
         });
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llTweet = new LinearLayout(getContext());
+                llTweet.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                llTweet.setOrientation(LinearLayout.VERTICAL);
+                GetAsyncTask task = new GetAsyncTask(TweetArrayAdapter.this);
+                task.execute(ListOfApiUrl.getUrlAllTweetResponseByIdCore(String.valueOf(t.getId())));
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setMessage(t.getTweet());
+                alert.setTitle("The response of the tweet:");
+                Log.i("sbire:", "avant set view");
+                alert.setView(llTweet);
+                Log.i("sbire:", "apres set view");
+                alert.show();
+                Log.i("sbire:", "show");
+
+            }
+        });
+
         // Return the completed view to render on screen
         return convertView;
     }
@@ -148,47 +160,12 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
 
     }
 
-    /**
-     * Sets ListView height dynamically based on the height of the items.
-     *
-     * @param listView to be resized
-     * @return true if the listView is successfully resized, false otherwise
-     * src: http://blog.lovelyhq.com/setting-listview-height-depending-on-the-items/
-     */
-    public static boolean setListViewHeightBasedOnItems(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter != null) {
-            int numberOfItems = listAdapter.getCount();
-            // Get total height of all items.
-            int totalItemsHeight = 0;
-            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
-                View item = listAdapter.getView(itemPos, null, listView);
-                item.measure(0, 0);
-                totalItemsHeight += item.getMeasuredHeight();
-            }
-            // Get total height of all item dividers.
-            int totalDividersHeight = listView.getDividerHeight() *
-                    (numberOfItems - 1);
-            // Set list height.
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalItemsHeight + totalDividersHeight;
-            listView.setLayoutParams(params);
-            listView.requestLayout();
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     @Override
     public void onPostGet(String sJSON) {
 
         try {
             JSONArray jResponse = new JSONArray(sJSON);
-            listResponseTweet.removeAll(listResponseTweet);
-
-            // TODO je pense que je vais le faire "mochement" en mode linearlayout et textview qui s'ajoute
-
             for (int i = 0; i < jResponse.length(); i++) {
                 JSONObject jEvent = jResponse.getJSONObject(i);
                 String sDate = jEvent.getString("postDate");
@@ -201,14 +178,40 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
                 Date date = new Date(d.getTime());
                 String author_name = jEvent.getString("name");
                 TweetResponse t = new TweetResponse(id, id_user, tweet, date, author_name, id_core);
-                Log.i("toString cp: ", t.toString());
-                listResponseTweet.add(t);
+
+                LinearLayout llOneTweet = new LinearLayout(getContext());
+                llOneTweet.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                llOneTweet.setOrientation(LinearLayout.VERTICAL);
+
+                LinearLayout llAuthorDate = new LinearLayout(getContext());
+                llAuthorDate.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                llAuthorDate.setOrientation(LinearLayout.HORIZONTAL);
+
+                TextView textAuthor = new TextView(getContext());
+                textAuthor.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                textAuthor.setText(t.getAuthor());
+                textAuthor.setPadding(0,0,10,0);
+                llAuthorDate.addView(textAuthor);
+
+                TextView textDate = new TextView(getContext());
+                textDate.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                SimpleDateFormat sdfPost = new SimpleDateFormat("dd-MM-yy HH:mm");
+                textDate.setText(sdfPost.format(t.getPostDate()));
+                textDate.setPadding(10,0,0,0);
+                llAuthorDate.addView(textDate);
+                llAuthorDate.setPadding(0,0,10,0);
+                llOneTweet.addView(llAuthorDate);
+
+                TextView textTweet = new TextView(getContext());
+                textTweet.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                textTweet.setText(t.getTweet());
+                llOneTweet.addView(textTweet);
+                llOneTweet.setPadding(5,0,5,20);
+
+
+                llTweet.addView(llOneTweet);
+                Log.i("tweet:", t.getTweet());
             }
-
-            TweetResponseArrayAdapter adapter = new TweetResponseArrayAdapter(getContext(), listResponseTweet);
-            lvResponseTweet.setAdapter(adapter);
-            setListViewHeightBasedOnItems(lvResponseTweet);
-
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {
