@@ -46,7 +46,7 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
     ArrayList<ChatMessage> listMessage;
     Timer timer;
     TimerTask tt;
-
+    String jsonArrayCompare;
 
 
     private GalleryFragment.GalleryFragmentCallback callback;
@@ -69,6 +69,7 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         lvChatMessage = (ListView) v.findViewById(R.id.lv_chat_messages);
         listMessage = new ArrayList<>();
+        jsonArrayCompare = "";
 
         btSend = (Button) v.findViewById(R.id.bt_chat_post);
         edMessage = (EditText) v.findViewById(R.id.ed_chat_message);
@@ -77,9 +78,9 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
             @Override
             public void onClick(View view) {
                 String message = edMessage.getText().toString();
-                if(message.equals("")){
+                if (message.equals("")) {
                     Toast.makeText(getContext(), "Your message is empty...", Toast.LENGTH_SHORT).show();
-                } else if(message.length() >= 200) {
+                } else if (message.length() >= 200) {
                     Toast.makeText(getContext(), "Not more than 200 characters please", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -106,7 +107,7 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
     }
 
 
-    private void updateListView(){
+    private void updateListView() {
         GetAsyncTask task = new GetAsyncTask(ChatFragment.this);
         task.execute(ListOfApiUrl.getUrlAllChatMessage());
     }
@@ -115,24 +116,22 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if(isVisibleToUser){
+        if (isVisibleToUser) {
             timer = new Timer();
             // pour afficher des trucs seulement quand on rentre dans l'onglet
             updateListView();
 
-            tt = new TimerTask()
-            {
+            tt = new TimerTask() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     updateListView();
                     // TODO refresh only if there are something new
                 }
             };
-            timer.scheduleAtFixedRate(tt,10000,10000);
+            timer.scheduleAtFixedRate(tt, 10000, 10000);
             // then run every 10 second
         } else {
-            if(timer != null){
+            if (timer != null) {
                 timer.cancel();
                 timer.purge();
                 timer = null;
@@ -148,33 +147,37 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
     @Override
     public void onPostGet(String sJSON) {
 
-        try {
-            JSONArray jResponse = new JSONArray(sJSON);
-            listMessage.removeAll(listMessage);
+        if (sJSON.equals(jsonArrayCompare)) {
+            Log.i("it's the same", "so we do nothing");
+        } else {
+            Log.i("it's not the same!","we refresh!");
+            jsonArrayCompare = sJSON;
+            try {
+                JSONArray jResponse = new JSONArray(sJSON);
+                listMessage.removeAll(listMessage);
 
-            for (int i=0;i<jResponse.length(); i++){
-                JSONObject jEvent = jResponse.getJSONObject(i);
-                String sDate = jEvent.getString("postDate");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date d = sdf.parse(sDate);
-                long id = jEvent.getLong("id");
-                String text = jEvent.getString("text");
-                long id_user = jEvent.getLong("id_user");
-                Date date = new Date(d.getTime());
-                String author_name = jEvent.getString("name");
-                ChatMessage ncm = new ChatMessage(id, text, date, id_user, author_name);
-                Log.i("toString cp: ", ncm.toString());
+                for (int i = 0; i < jResponse.length(); i++) {
+                    JSONObject jEvent = jResponse.getJSONObject(i);
+                    String sDate = jEvent.getString("postDate");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date d = sdf.parse(sDate);
+                    long id = jEvent.getLong("id");
+                    String text = jEvent.getString("text");
+                    long id_user = jEvent.getLong("id_user");
+                    Date date = new Date(d.getTime());
+                    String author_name = jEvent.getString("name");
+                    ChatMessage ncm = new ChatMessage(id, text, date, id_user, author_name);
+                    listMessage.add(ncm);
+                }
 
-                listMessage.add(ncm);
+                ChatMessageArrayAdapter adapter = new ChatMessageArrayAdapter(getContext(), listMessage);
+                lvChatMessage.setAdapter(adapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-
-            ChatMessageArrayAdapter adapter = new ChatMessageArrayAdapter(getContext(), listMessage);
-            lvChatMessage.setAdapter(adapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
 
     }

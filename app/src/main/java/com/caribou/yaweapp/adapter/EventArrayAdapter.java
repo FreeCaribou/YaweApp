@@ -36,8 +36,6 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         final String curentTime = sdf.format(e.getDateEvent());
-
-        String heure = e.getHours();
         tvDate.setText(curentTime);
 
         convertView.setOnClickListener(new View.OnClickListener() {

@@ -142,12 +142,8 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
                 AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
                 alert.setMessage(t.getTweet());
                 alert.setTitle("The response of the tweet:");
-                Log.i("sbire:", "avant set view");
                 alert.setView(llTweet);
-                Log.i("sbire:", "apres set view");
                 alert.show();
-                Log.i("sbire:", "show");
-
             }
         });
 

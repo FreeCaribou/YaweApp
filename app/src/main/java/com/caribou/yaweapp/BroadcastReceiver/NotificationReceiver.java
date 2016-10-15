@@ -2,6 +2,7 @@ package com.caribou.yaweapp.BroadcastReceiver;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.caribou.yaweapp.ApiUrl.ListOfApiUrl;
+import com.caribou.yaweapp.EventDetailActivity;
+import com.caribou.yaweapp.ListEventsActivity;
 import com.caribou.yaweapp.R;
 import com.caribou.yaweapp.model.Event;
 import com.caribou.yaweapp.task.GetAsyncTask;
@@ -111,6 +114,17 @@ public class NotificationReceiver extends BroadcastReceiver implements GetAsyncT
         boolean isRead = prefs.getBoolean(String.valueOf(e.getId()), false);
 
         if(sameDay && !isRead){
+            Intent intentNotif = new Intent(context, EventDetailActivity.class);
+            intentNotif.putExtra("id",e.getId());
+            intentNotif.putExtra("title",e.getTitle());
+            SimpleDateFormat sdfDetail = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            final String timeDetail = sdfDetail.format(e.getDateEvent());
+            intentNotif.putExtra("date",timeDetail);
+            intentNotif.putExtra("description",e.getDescription());
+            intentNotif.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            PendingIntent intent = PendingIntent.getActivity(context, 0,
+                    intentNotif, 0);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
             builder.setSmallIcon(R.drawable.yawe_logo);
             builder.setContentTitle(e.getTitle());
@@ -122,8 +136,11 @@ public class NotificationReceiver extends BroadcastReceiver implements GetAsyncT
             description = curentTime;
             builder.setContentText(description);
             Notification notification = builder.build();
+            notification.contentIntent = intent;
+            notification.flags = Notification.FLAG_AUTO_CANCEL;
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.notify(0, notification);
+
             editor.putBoolean(String.valueOf(e.getId()),true);
             editor.apply();
         } else {
