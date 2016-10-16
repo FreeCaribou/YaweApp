@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+<!-- TODO find better icon -->
+
+    <item android:title="Home"
+        android:id="@+id/nav_item_home"
+        android:icon="@drawable/home"/>
+
+    <item android:title="My Account"
+        android:id="@+id/nav_item_myAccount"
+        android:icon="@drawable/my_account"/>
+
+    <item android:title="List Member"
+    android:id="@+id/nav_item_listMember"
+    android:icon="@drawable/list_member"/>
+
+    <item android:title="List Event"
+        android:id="@+id/nav_item_listEvent"
+        android:icon="@drawable/list_event"/>
+
+</menu>

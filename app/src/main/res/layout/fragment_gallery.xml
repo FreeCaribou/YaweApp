@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:paddingBottom="55dp"
-    android:background="@color/colorPrimary"
     tools:context=".fragment.GalleryFragment">
 
     <!-- TODO trouver une meilleure manière d'éviter le coupement de fin
