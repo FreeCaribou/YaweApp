@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.caribou.yaweapp.CreateEventActivity;
+import com.caribou.yaweapp.CreateUserActivity;
 import com.caribou.yaweapp.EditGuildMessageActivity;
+import com.caribou.yaweapp.ListUsersActivity;
+import com.caribou.yaweapp.MainActivity;
 import com.caribou.yaweapp.R;
 
 public class AdminFragment extends Fragment {
@@ -17,12 +21,6 @@ public class AdminFragment extends Fragment {
     private Button btCreateEvent;
     private Button btListUser;
     private Button btEditMessage;
-
-    private AdminFragmentCallback callback;
-
-    public void setCallback(AdminFragmentCallback callback) {
-        this.callback = callback;
-    }
 
     public AdminFragment() {
         // Required empty public constructor
@@ -51,45 +49,28 @@ public class AdminFragment extends Fragment {
         btCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               callback.intentGoCreateUser();
-//                Intent goCreateUser = new Intent(getActivity(), CreateUserActivity.class);
-//                getActivity().startActivity(goCreateUser);
+                Intent goCreateUser = new Intent(getContext(), CreateUserActivity.class);
+                startActivity(goCreateUser);
             }
         });
 
         btCreateEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.intentGoCreateEvent();
-//                Intent goCreateEvent = new Intent(getContext(), CreateEventActivity.class);
-//                startActivity(goCreateEvent);
+                Intent goCreateEvent = new Intent(getContext(), CreateEventActivity.class);
+                startActivity(goCreateEvent);
             }
         });
 
         btListUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callback.intentGoListUsers();
+                Intent goListUsers = new Intent(getContext(), ListUsersActivity.class);
+                startActivity(goListUsers);
             }
         });
 
         return v;
     }
 
-    public interface AdminFragmentCallback{
-
-        void intentGoCreateUser();
-        void intentGoCreateEvent();
-        void intentGoListUsers();
-
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-
-        if(isVisibleToUser){
-            // pour afficher des trucs seulement quand on rentre dans l'onglet
-        }
-    }
 }

@@ -57,9 +57,6 @@ public class MyAccountActivity extends AppCompatActivity implements GetAsyncTask
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-
-
-
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         race = "";

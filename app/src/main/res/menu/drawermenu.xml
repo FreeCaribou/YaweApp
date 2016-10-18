@@ -20,4 +20,9 @@
         android:id="@+id/nav_item_listEvent"
         android:icon="@drawable/list_event"/>
 
+    <item android:title="Admin"
+        android:id="@+id/nav_item_admin"
+
+        />
+
 </menu>

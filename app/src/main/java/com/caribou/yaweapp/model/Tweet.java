@@ -10,6 +10,16 @@ public class Tweet {
     private String tweet;
     private Date postDate;
     private String author;
+    private int nbResponse;
+
+    public Tweet(long id_user, long id, String tweet, Date postDate, String author, int nbResponse) {
+        this.id_user = id_user;
+        this.id = id;
+        this.tweet = tweet;
+        this.postDate = postDate;
+        this.author = author;
+        this.nbResponse = nbResponse;
+    }
 
     public Tweet(long id, long id_user, String tweet, Date postDate) {
         this.id = id;
@@ -27,6 +37,14 @@ public class Tweet {
     }
 
     public Tweet() {
+    }
+
+    public int getNbResponse() {
+        return nbResponse;
+    }
+
+    public void setNbResponse(int nbResponse) {
+        this.nbResponse = nbResponse;
     }
 
     public long getId() {

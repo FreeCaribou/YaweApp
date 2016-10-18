@@ -58,18 +58,15 @@ public class ListUsersActivity extends AppCompatActivity implements GetAsyncTask
         try {
             JSONArray jResponse = new JSONArray(sJSON);
             listUsers.removeAll(listUsers);
-
             for (int i=0;i<jResponse.length(); i++){
                 JSONObject jUser = jResponse.getJSONObject(i);
                 long id = jUser.getLong("id");
                 String name = jUser.getString("name");
-                String password = jUser.getString("password");
                 // TODO verifier si heretic ou admin (mais pour le moment osef)
                 int admin = jUser.getInt("admin");
                 int heretic = jUser.getInt("heretic");
                 User u = new User();
                 u.setId(id);
-                u.setPassword(password);
                 u.setName(name);
                 if(admin == 1){
                     u.setAdmin(true);

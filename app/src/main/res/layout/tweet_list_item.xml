@@ -48,14 +48,14 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bt_tweetItem_response"
-            android:layout_gravity="center"
-            android:text="Response"
-            android:layout_weight="3"
-            />
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/bt_tweetItem_response"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="Response"-->
+            <!--android:layout_weight="3"-->
+            <!--/>-->
 
     </LinearLayout>
 

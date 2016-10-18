@@ -1,5 +1,6 @@
 package com.caribou.yaweapp;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -12,13 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.caribou.yaweapp.fragment.AdminFragment;
 import com.caribou.yaweapp.fragment.GalleryFragment;
 import com.caribou.yaweapp.fragment.HomeFragment;
 import com.caribou.yaweapp.fragment.MemberFragment;
 
 
-public class MainActivity extends AppCompatActivity implements AdminFragment.AdminFragmentCallback, GalleryFragment.GalleryFragmentCallback, HomeFragment.HomeFragmentCallback, MemberFragment.MemberFragmentCallback {
+public class MainActivity extends AppCompatActivity implements GalleryFragment.GalleryFragmentCallback, HomeFragment.HomeFragmentCallback, MemberFragment.MemberFragmentCallback {
 
     private Toolbar toolbar;
 
@@ -84,6 +87,14 @@ public class MainActivity extends AppCompatActivity implements AdminFragment.Adm
                     Intent goListEvents = new Intent(MainActivity.this, ListEventsActivity.class);
                     startActivity(goListEvents);
                 }
+                if (menuItem.getItemId() == R.id.nav_item_admin) {
+                    if(isAdmin){
+                        FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
+                        xfragmentTransaction.replace(R.id.containerView, new AdminFragment()).commit();
+                    } else {
+                        Toast.makeText(MainActivity.this, "You aren't admin!", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 return false;
             }
 
@@ -105,18 +116,6 @@ public class MainActivity extends AppCompatActivity implements AdminFragment.Adm
 
 
     @Override
-    public void intentGoCreateUser() {
-        Intent goCreateUser = new Intent(MainActivity.this, CreateUserActivity.class);
-        startActivity(goCreateUser);
-    }
-
-    @Override
-    public void intentGoCreateEvent() {
-        Intent goCreateEvent = new Intent(MainActivity.this, CreateEventActivity.class);
-        startActivity(goCreateEvent);
-    }
-
-    @Override
     public void intentCreatePicture() {
         Intent goCreatePicture = new Intent(MainActivity.this, CreatePictureActivity.class);
         startActivity(goCreatePicture);
@@ -132,11 +131,6 @@ public class MainActivity extends AppCompatActivity implements AdminFragment.Adm
     public void intentListEvents() {
         Intent goListEvents = new Intent(MainActivity.this, ListEventsActivity.class);
         startActivity(goListEvents);
-    }
-
-    public void intentGoListUsers() {
-        Intent goListUsers = new Intent(MainActivity.this, ListUsersActivity.class);
-        startActivity(goListUsers);
     }
 
 }

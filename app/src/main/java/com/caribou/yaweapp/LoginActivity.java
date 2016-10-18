@@ -15,11 +15,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.caribou.yaweapp.ApiUrl.ListOfApiUrl;
+import com.caribou.yaweapp.model.User;
 import com.caribou.yaweapp.task.GetAsyncTask;
+import com.caribou.yaweapp.task.PostConnectionVerificationAsyncTask;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity implements GetAsyncTask.GetAsyncTaskCallback {
+public class LoginActivity extends AppCompatActivity implements GetAsyncTask.GetAsyncTaskCallback, PostConnectionVerificationAsyncTask.PostConnectionVerificationAsyncTaskCallback {
 
     Button btLogin;
     EditText edUsername;
@@ -56,21 +59,25 @@ public class LoginActivity extends AppCompatActivity implements GetAsyncTask.Get
 
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("loginUsername", username );
+                editor.putString("loginUsername", username);
 
-                if(wifi.isConnected() || mobile.isConnected()) {
+                if (wifi.isConnected() || mobile.isConnected()) {
                     username = edUsername.getText().toString();
                     password = edPassword.getText().toString();
-                    if(mobile.isConnected()){
+                    if (mobile.isConnected()) {
                         Toast.makeText(LoginActivity.this, R.string.carefull_with_mobile_data, Toast.LENGTH_SHORT).show();
                     }
-                    GetAsyncTask task = new GetAsyncTask(LoginActivity.this);
-                    task.execute(ListOfApiUrl.getUrlUserByName(username));
+//                    GetAsyncTask task = new GetAsyncTask(LoginActivity.this);
+//                    task.execute(ListOfApiUrl.getUrlUserByName(username));
+                    User uVerification = new User();
+                    uVerification.setName(username);
+                    uVerification.setPassword(password);
+                    PostConnectionVerificationAsyncTask task = new PostConnectionVerificationAsyncTask(LoginActivity.this);
+                    task.execute(uVerification);
 
-                    if(cbRemember.isChecked()){
-
-                        editor.putString("loginUsername", username );
-                        editor.putString("loginPassword", password );
+                    if (cbRemember.isChecked()) {
+                        editor.putString("loginUsername", username);
+                        editor.putString("loginPassword", password);
                         editor.putBoolean("loginCheckRemember", true);
                         editor.apply();
                     }
@@ -90,33 +97,64 @@ public class LoginActivity extends AppCompatActivity implements GetAsyncTask.Get
 
     @Override
     public void onPostGet(String sJSON) {
+//        try {
+//            JSONObject jsonObject = new JSONObject(sJSON);
+//            String jPassword = jsonObject.getString("password");
+//            String jUsername = jsonObject.getString("name");
+//            long jId = jsonObject.getLong("id");
+//            Boolean jAdmin;
+//            Boolean jHeretic;
+//            jAdmin = jsonObject.getInt("admin") == 1;
+//            jHeretic = jsonObject.getInt("heretic") == 1;
+//            if (jPassword.equals(password)) {
+//                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+//                SharedPreferences.Editor editor = prefs.edit();
+//                editor.putLong("id_user", jId);
+//                editor.putBoolean("isAdmin", jAdmin);
+//                editor.putBoolean("isHeretic", jHeretic);
+//                editor.putString("username", jUsername);
+//                editor.apply();
+//                Intent goLogin = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(goLogin);
+//                finish();
+//            } else {
+//                Toast.makeText(LoginActivity.this, R.string.bad_name_password, Toast.LENGTH_SHORT).show();
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//
+//        }
+    }
+
+    @Override
+    public void onVerificationGet(String sJSON) {
         try {
             JSONObject jsonObject = new JSONObject(sJSON);
-            String jPassword = jsonObject.getString("password");
             String jUsername = jsonObject.getString("name");
             long jId = jsonObject.getLong("id");
             Boolean jAdmin;
             Boolean jHeretic;
             jAdmin = jsonObject.getInt("admin") == 1;
             jHeretic = jsonObject.getInt("heretic") == 1;
-            if (jPassword.equals(password)) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putLong("id_user", jId);
-                editor.putBoolean("isAdmin", jAdmin);
-                editor.putBoolean("isHeretic", jHeretic);
-                editor.putString("username", jUsername);
-                editor.apply();
-                Intent goLogin = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(goLogin);
-                finish();
-            } else {
-                Toast.makeText(LoginActivity.this, R.string.bad_name_password, Toast.LENGTH_SHORT).show();
-            }
-
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putLong("id_user", jId);
+            editor.putBoolean("isAdmin", jAdmin);
+            editor.putBoolean("isHeretic", jHeretic);
+            editor.putString("username", jUsername);
+            editor.apply();
+            Intent goLogin = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(goLogin);
+            finish();
         } catch (JSONException e) {
             e.printStackTrace();
-
+            Toast.makeText(this, R.string.bad_name_password, Toast.LENGTH_SHORT).show();
         }
+
     }
+
+    // TODO do connection more secure!!!
+
+
 }
