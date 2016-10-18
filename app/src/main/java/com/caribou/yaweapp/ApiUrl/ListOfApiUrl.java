@@ -1,12 +1,14 @@
 package com.caribou.yaweapp.ApiUrl;
 
 
+import java.net.URL;
+
 public class ListOfApiUrl {
 
     // here will be the path of your url route for API
     // EDIT YOURSELF WITH YOUR API URL (or other url)
-    private final static String URL_API_BASE = "an url to your api";
-    private final static String URL_UPLOAD_PICTURE = "an url to your website";
+    private final static String URL_API_BASE = "";
+    private final static String URL_UPLOAD_PICTURE = "";
 
     // and here all the method of all your request API
 
@@ -18,7 +20,7 @@ public class ListOfApiUrl {
         return URL_API_BASE + "user/search/" + username;
     }
 
-    public static String getUrlUserById(String id){
+    public static String getUrlUserById(String id) {
         return URL_API_BASE + "user/" + id;
     }
 
@@ -50,65 +52,85 @@ public class ListOfApiUrl {
         return URL_API_BASE + "addPicture";
     }
 
-    public static String getUrlAddUser(){
+    public static String getUrlAddUser() {
         return URL_API_BASE + "addUser";
     }
 
-    public static String getUrlUpdatePicture(String id){
+    public static String getUrlUpdatePicture(String id) {
         return URL_API_BASE + "updatePicture/" + id;
     }
 
-    public static String getUrlUpdateUserAdmin(String id){
+    public static String getUrlUpdateUserAdmin(String id) {
         return URL_API_BASE + "updateUserAdmin/" + id;
     }
 
-    public static String getUrlUpdateUserHeretic(String id){
+    public static String getUrlUpdateUserHeretic(String id) {
         return URL_API_BASE + "updateUserHeretic/" + id;
     }
 
-    public static String getUrlUpdateUserPassword(String id){
+    public static String getUrlUpdateUserPassword(String id) {
         return URL_API_BASE + "updateUserPassword/" + id;
     }
 
-    public static String getUrlGuildMessage(){
+    public static String getUrlGuildMessage() {
         return URL_API_BASE + "message";
     }
 
-    public static String getUrlEditGuildMessage(){
+    public static String getUrlEditGuildMessage() {
         return URL_API_BASE + "updateGuildMessage";
     }
 
     // not a url of API
-    public static String getUrlUploadPicture(){
+    public static String getUrlUploadPicture() {
         return URL_UPLOAD_PICTURE;
     }
 
-    public static String getUrlAllCommentPictureByIdPicture( String id_picture){
+    public static String getUrlAllCommentPictureByIdPicture(String id_picture) {
         return URL_API_BASE + "commentPicture/" + id_picture;
     }
 
-    public static String getUrlAddCommentPicture(){
+    public static String getUrlAddCommentPicture() {
         return URL_API_BASE + "addCommentPicture";
     }
 
-    public static String getUrlAddChatMessage(){
+    public static String getUrlAddChatMessage() {
         return URL_API_BASE + "addChatMessage";
     }
 
-    public static String getUrlAllChatMessage(){
+    public static String getUrlAllChatMessage() {
         return URL_API_BASE + "chatMessage";
     }
 
-    public static String getUrlAllUserDetail(){
+    public static String getUrlAllUserDetail() {
         return URL_API_BASE + "userDetail";
     }
 
-    public static String getUrlUpdateUserDetail(String id){
+    public static String getUrlUpdateUserDetail(String id) {
         return URL_API_BASE + "updateUserDetail/" + id;
     }
 
-    public static String getUrlUserDetailById(String id){
+    public static String getUrlUserDetailById(String id) {
         return URL_API_BASE + "userDetailById/" + id;
+    }
+
+    public static String getUrlAddTweet() {
+        return URL_API_BASE + "addTweet";
+    }
+
+    public static String getUrlAllTweetByIdUser(String id) {
+        return URL_API_BASE + "tweet/" + id;
+    }
+
+    public static String getUrlAddTweetResponse() {
+        return URL_API_BASE + "addTweetResponse";
+    }
+
+    public static String getUrlAllTweetResponseByIdCore(String id){
+        return URL_API_BASE + "tweetResponse/" + id;
+    }
+
+    public static String getUrlConnectionVerification(){
+        return URL_API_BASE + "connectionVerification";
     }
 
 

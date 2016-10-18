@@ -34,7 +34,15 @@
                     android:id="@+id/tv_tweetItem_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:text="Post Date" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_tweetItem_nbResponse"
+                    android:text="@string/response"
+                    />
 
             </LinearLayout>
 

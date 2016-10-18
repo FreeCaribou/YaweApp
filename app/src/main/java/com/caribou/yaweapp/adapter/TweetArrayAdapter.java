@@ -51,6 +51,8 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
     TextView tvAuthor;
     TextView tvTweet;
     TextView tvDate;
+    TextView tvNbResponse;
+    int nbResponse;
     //    Button btTweetResponse;
     String newTweet;
     LinearLayout llTweet;
@@ -80,9 +82,13 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
         tvAuthor.setText(t.getAuthor());
         tvDate = (TextView) convertView.findViewById(R.id.tv_tweetItem_date);
         tvTweet = (TextView) convertView.findViewById(R.id.tv_tweetItem_tweet);
+        tvNbResponse = (TextView) convertView.findViewById(R.id.tv_tweetItem_nbResponse);
         // Populate the data into the template view using the data object
         tvTweet.setText(t.getTweet());
         id = t.getId();
+        nbResponse = t.getNbResponse();
+        String responseText = getContext().getString(R.string.response);
+        tvNbResponse.setText(responseText + " " + String.valueOf(nbResponse));
 
         SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yy HH:mm");
         SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
@@ -111,7 +117,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
                 AlertDialog.Builder b = new AlertDialog.Builder(getContext());
                 alert = b.create();
                 alert.setMessage(t.getTweet());
-                alert.setTitle("The response of the tweet:");
+                alert.setTitle(getContext().getString(R.string.response_tweet_title));
                 alert.setView(svTweet);
                 alert.show();
                 alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);

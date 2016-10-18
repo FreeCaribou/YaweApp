@@ -82,4 +82,6 @@
     <string name="main_roll_race">Main roll race</string>
     <string name="tweet_empty">Your tweet is empty...</string>
     <string name="max_140">Max 140 character please!</string>
+    <string name="response">Response: </string>
+    <string name="response_tweet_title">The response of the tweet:</string>
 </resources>
