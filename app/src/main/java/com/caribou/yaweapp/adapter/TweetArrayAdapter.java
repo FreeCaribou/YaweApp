@@ -68,7 +68,6 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
 
     public View getView(int position, View convertView, final ViewGroup parent) {
 
-
         // Get the data item for this position
 
         final Tweet t = getItem(position);
