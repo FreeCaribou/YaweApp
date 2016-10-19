@@ -14,3 +14,5 @@ An application for a guild in Guild Wars 2 with chat room, a gallery, guild mess
 
 # Special thanks
 
+To the formation center Evoliris for the Android formation and of course thanks to the teacher.
+And also thanks to Hamaé, a member of the Yawe guild who had test the application and give some ideas!
