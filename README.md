@@ -13,3 +13,4 @@ An application for a guild in Guild Wars 2 with chat room, a gallery, guild mess
 
 
 # Special thanks
+
