@@ -12,7 +12,7 @@ public class Tweet {
     private String author;
     private int nbResponse;
 
-    public Tweet(long id_user, long id, String tweet, Date postDate, String author, int nbResponse) {
+    public Tweet(long id, long id_user, String tweet, Date postDate, String author, int nbResponse) {
         this.id_user = id_user;
         this.id = id;
         this.tweet = tweet;

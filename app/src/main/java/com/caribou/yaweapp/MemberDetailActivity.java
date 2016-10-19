@@ -202,6 +202,7 @@ public class MemberDetailActivity extends AppCompatActivity implements GetAsyncT
                 int nbResponse = jEvent.getInt("nbResponse");
                 Tweet t = new Tweet(id, id_user, tweet, date, author_name, nbResponse);
                 Log.i("toString cp: ", t.toString());
+                Log.i("id du tweet", String.valueOf(t.getId()));
 
                 listTweet.add(t);
             }
