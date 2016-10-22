@@ -79,9 +79,9 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
             public void onClick(View view) {
                 String message = edMessage.getText().toString();
                 if (message.equals("")) {
-                    Toast.makeText(getContext(), "Your message is empty...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.message_empty, Toast.LENGTH_SHORT).show();
                 } else if (message.length() >= 200) {
-                    Toast.makeText(getContext(), "Not more than 200 characters please", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.not_more_200, Toast.LENGTH_SHORT).show();
                 } else {
 
                     ChatMessage cm = new ChatMessage();
@@ -125,7 +125,6 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
                 @Override
                 public void run() {
                     updateListView();
-                    // TODO refresh only if there are something new
                 }
             };
             timer.scheduleAtFixedRate(tt, 10000, 10000);
@@ -148,9 +147,8 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
     public void onPostGet(String sJSON) {
 
         if (sJSON.equals(jsonArrayCompare)) {
-            Log.i("it's the same", "so we do nothing");
+            // we do nothing because nothing have change
         } else {
-            Log.i("it's not the same!","we refresh!");
             jsonArrayCompare = sJSON;
             try {
                 JSONArray jResponse = new JSONArray(sJSON);

@@ -154,12 +154,12 @@ public class MyAccountActivity extends AppCompatActivity implements GetAsyncTask
                         User u = new User(id, "name", pass, false, false);
                         UpdateUserPasswordAsyncTask task = new UpdateUserPasswordAsyncTask();
                         task.execute(u);
-                        Toast.makeText(MyAccountActivity.this, "Password change", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyAccountActivity.this, R.string.password_change, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MyAccountActivity.this, "Passwords isn't the same", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyAccountActivity.this, R.string.password_not_same, Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(MyAccountActivity.this, "Put a new password please", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyAccountActivity.this, R.string.new_pass, Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -203,7 +203,7 @@ public class MyAccountActivity extends AppCompatActivity implements GetAsyncTask
                     PostTweetAsyncTask task = new PostTweetAsyncTask();
                     task.execute(t);
                     finish();
-                    Toast.makeText(MyAccountActivity.this, "Tweet posted!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyAccountActivity.this, R.string.tweet_posted, Toast.LENGTH_SHORT).show();
                 }
             }
         });

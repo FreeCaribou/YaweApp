@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements GalleryFragment.G
                         FragmentTransaction xfragmentTransaction = mFragmentManager.beginTransaction();
                         xfragmentTransaction.replace(R.id.containerView, new AdminFragment()).commit();
                     } else {
-                        Toast.makeText(MainActivity.this, "You aren't admin!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, R.string.you_are_not_admin, Toast.LENGTH_SHORT).show();
                     }
                 }
                 return false;

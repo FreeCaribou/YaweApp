@@ -77,7 +77,7 @@ public class UserDetailActivity extends AppCompatActivity {
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(UserDetailActivity.this);
                     alert.setTitle(R.string.are_you_sur);
-                    alert.setMessage("You are going to delete this member!");
+                    alert.setMessage(R.string.delete_member_sur);
 
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -90,7 +90,7 @@ public class UserDetailActivity extends AppCompatActivity {
                     alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(UserDetailActivity.this, "User not deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserDetailActivity.this, R.string.user_not_delete, Toast.LENGTH_SHORT).show();
                         }
                     });
                     AlertDialog show = alert.create();
@@ -104,16 +104,16 @@ public class UserDetailActivity extends AppCompatActivity {
                     String alertMessage = "";
                     if (isAdmin){
                         u.setAdmin(false);
-                        alertMessage = "You are going to remove admin power to this user!";
+                        alertMessage = getString(R.string.remove_admin_power);
                     } else {
                         u.setAdmin(true);
-                        alertMessage = "You are going to give admin power to this user!";
+                        alertMessage = getString(R.string.give_admin_power);
                     }
                     AlertDialog.Builder alert = new AlertDialog.Builder(UserDetailActivity.this);
                     alert.setTitle(R.string.are_you_sur);
                     alert.setMessage(alertMessage);
 
-                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    alert.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             UpdateUserAdminAsynckTask task = new UpdateUserAdminAsynckTask();
@@ -121,10 +121,10 @@ public class UserDetailActivity extends AppCompatActivity {
                             finish();
                         }
                     });
-                    alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    alert.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(UserDetailActivity.this, "Member not changed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserDetailActivity.this, R.string.member_not_changed, Toast.LENGTH_SHORT).show();
                         }
                     });
                     AlertDialog show = alert.create();

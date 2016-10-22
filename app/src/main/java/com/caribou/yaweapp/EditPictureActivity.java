@@ -63,7 +63,7 @@ public class EditPictureActivity extends AppCompatActivity {
                 Picture p = new Picture(id,edUrl.getText().toString(),edTitle.getText().toString(),edDescription.getText().toString(), 0);
                 UpdatePictureAsyncTask task = new UpdatePictureAsyncTask();
                 task.execute(p);
-                Toast.makeText(EditPictureActivity.this, "Picture was edited", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPictureActivity.this, R.string.picture_edit, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

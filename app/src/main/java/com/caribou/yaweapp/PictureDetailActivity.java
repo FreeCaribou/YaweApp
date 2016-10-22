@@ -135,8 +135,8 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
                 public boolean onLongClick(View view) {
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(PictureDetailActivity.this);
-                    alert.setTitle("Download this picture?");
-                    alert.setMessage("You will be redirected to your browser");
+                    alert.setTitle(R.string.download_picture);
+                    alert.setMessage(R.string.redic_browser);
 
                     alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
@@ -149,7 +149,7 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
                         }
                     });
 
-                    alert.setNegativeButton("No please", new DialogInterface.OnClickListener() {
+                    alert.setNegativeButton(R.string.no_please, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -167,7 +167,7 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
             @Override
             public void onClick(View view) {
                 if(edComment.getText().toString().equals("")){
-                    Toast.makeText(PictureDetailActivity.this, "Message is empty...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PictureDetailActivity.this, R.string.message_empty, Toast.LENGTH_SHORT).show();
                 } else {
                     CommentPicture cp = new CommentPicture();
                     cp.setId_picture(id);
@@ -206,8 +206,8 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
                 if(isAuthor || isAdmin){
                     AlertDialog.Builder alert = new AlertDialog.Builder(PictureDetailActivity.this);
                     alert.setTitle(R.string.are_you_sur);
-                    alert.setMessage("You are going to delete this beautiful picture!");
-                    alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    alert.setMessage(R.string.delete_beautiful);
+                    alert.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             DeleteAsyncTask delete = new DeleteAsyncTask();
@@ -215,16 +215,16 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
                             finish();
                         }
                     });
-                    alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    alert.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(PictureDetailActivity.this, "Picture not deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PictureDetailActivity.this, R.string.picture_not_delete, Toast.LENGTH_SHORT).show();
                         }
                     });
                     AlertDialog show = alert.create();
                     show.show();
                 } else {
-                    Toast.makeText(this, "You aren't admin or the author of this picture, you can't delete this", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.not_delete_picture_adminorauthor, Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -239,7 +239,7 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
                     startActivity(goDetail);
                     finish();
                 } else {
-                    Toast.makeText(this, "You aren't the author of this picture, you can't edit this", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.not_edit_not_author, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

@@ -202,9 +202,9 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
                     newTweet = edNewTweet.getText().toString();
                     Log.i("text:", newTweet);
                     if (newTweet.length() > 140) {
-                        Toast.makeText(getContext(), "Max 140 character please", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.max_140, Toast.LENGTH_SHORT).show();
                     } else if (newTweet.isEmpty()) {
-                        Toast.makeText(getContext(), "Your tweet is empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.message_empty, Toast.LENGTH_SHORT).show();
                     } else {
                         TweetResponse tr = new TweetResponse();
                         tr.setId_core(id);
@@ -217,7 +217,7 @@ public class TweetArrayAdapter extends ArrayAdapter<Tweet> implements GetAsyncTa
                         PostTweetResponseAsyncTask task = new PostTweetResponseAsyncTask();
                         task.execute(tr);
 
-                        Toast.makeText(getContext(), "Tweet response posted!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.tweet_posted, Toast.LENGTH_SHORT).show();
                         newTweet = "";
                         alert.dismiss();
 

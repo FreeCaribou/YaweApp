@@ -108,19 +108,19 @@ public class MemberDetailActivity extends AppCompatActivity implements GetAsyncT
                 public void onClick(View v) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(MemberDetailActivity.this);
                     final EditText edNewTweet = new EditText(MemberDetailActivity.this);
-                    edNewTweet.setHint("Your new tweet");
+                    edNewTweet.setHint(R.string.new_tweet);
                     edNewTweet.setText(newTweet);
-                    alert.setMessage("You have kill a german player in WvW? Say it!");
-                    alert.setTitle("Post a new tweet");
+                    alert.setMessage(R.string.kill_german_player);
+                    alert.setTitle(R.string.post_new_tweet);
                     alert.setView(edNewTweet);
                     alert.setPositiveButton("Post", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             newTweet = edNewTweet.getText().toString();
                             Log.i("text:", newTweet);
                             if (newTweet.length() > 140) {
-                                Toast.makeText(MemberDetailActivity.this, "Max 140 character please", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MemberDetailActivity.this, R.string.max_140, Toast.LENGTH_SHORT).show();
                             } else if (newTweet.isEmpty()) {
-                                Toast.makeText(MemberDetailActivity.this, "Your tweet is empty", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MemberDetailActivity.this, R.string.tweet_empty, Toast.LENGTH_SHORT).show();
                             } else {
                                 Tweet t = new Tweet();
                                 t.setId_user(id);
@@ -130,12 +130,12 @@ public class MemberDetailActivity extends AppCompatActivity implements GetAsyncT
                                 task.execute(t);
                                 GetAsyncTask taskGet = new GetAsyncTask(MemberDetailActivity.this);
                                 taskGet.execute(ListOfApiUrl.getUrlAllTweetByIdUser(String.valueOf(id)));
-                                Toast.makeText(MemberDetailActivity.this, "Tweet posted!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MemberDetailActivity.this, R.string.tweet_posted, Toast.LENGTH_SHORT).show();
                                 newTweet = "";
                             }
                         }
                     });
-                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             newTweet = edNewTweet.getText().toString();
                         }
