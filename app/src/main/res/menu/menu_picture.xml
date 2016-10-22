@@ -7,13 +7,13 @@
 
     <item
         android:id="@+id/action_deletePicture"
-        android:title="Delete this picture"
+        android:title="@string/delete_this_picture"
         android:orderInCategory="100"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_editPicture"
-        android:title="Edit this picture"
+        android:title="@string/edit_this_picture"
         android:orderInCategory="100"
         app:showAsAction="never" />
 

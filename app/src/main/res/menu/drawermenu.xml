@@ -4,23 +4,23 @@
 
 <!-- TODO find better icon -->
 
-    <item android:title="Home"
+    <item android:title="@string/home"
         android:id="@+id/nav_item_home"
         android:icon="@drawable/home"/>
 
-    <item android:title="My Account"
+    <item android:title="@string/my_account"
         android:id="@+id/nav_item_myAccount"
         android:icon="@drawable/my_account"/>
 
-    <item android:title="List Member"
+    <item android:title="@string/list_member"
     android:id="@+id/nav_item_listMember"
     android:icon="@drawable/list_member"/>
 
-    <item android:title="List Event"
+    <item android:title="@string/list_of_events"
         android:id="@+id/nav_item_listEvent"
         android:icon="@drawable/list_event"/>
 
-    <item android:title="Admin"
+    <item android:title="@string/admin"
         android:id="@+id/nav_item_admin"
 
         />

@@ -74,27 +74,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/H4"
-            android:text="Comment:"
+            android:text="@string/comment"
             />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ed_pictureDetail_comment"
-            android:hint="Wooo, what a beautiful picture!"
+            android:hint="@string/wooo_what_a_beautiful_picture"
             />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bt_pictureDetail_comment"
-            android:text="Comment"
+            android:text="@string/comment"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="List of comments:"
+            android:text="@string/list_of_comments"
             />
 
         <ListView

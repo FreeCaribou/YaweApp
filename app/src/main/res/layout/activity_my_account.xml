@@ -31,27 +31,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/H6"
-            android:text="Post a tweet:"
+            android:text="@string/post_a_tweet"
             />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ed_account_tweet"
-            android:hint="I have eat potato!"
+            android:hint="@string/i_have_eat_potato"
             />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt_account_tweet"
-            android:text="Post your tweet"
+            android:text="@string/post_your_tweet"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Main roll race:"
+            android:text="@string/main_roll_race"
             style="@style/H6" />
 
         <Spinner
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Main roll profession:"
+            android:text="@string/main_roll_profession"
             style="@style/H6"/>
 
         <Spinner
@@ -73,44 +73,44 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Main roll gameplay style:"
+            android:text="@string/main_roll_gameplay_style"
             style="@style/H6" />
 
         <EditText
             android:id="@+id/ed_account_gameplay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Your main roll gameplay style" />
+            android:hint="@string/your_main_roll_gameplay_style" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Favorite Activity in GW2:"
+            android:text="@string/favorite_activity_in_gw2"
             style="@style/H6" />
 
         <EditText
             android:id="@+id/ed_account_activity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Your favorite activity in GW2" />
+            android:hint="@string/your_favorite_activity_in_gw2" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My mood of the moment:"
+            android:text="@string/my_mood_of_the_moment"
             style="@style/H6" />
 
         <EditText
             android:id="@+id/ed_account_mood"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="What is your mood?" />
+            android:hint="@string/what_is_your_mood" />
 
         <Button
             android:id="@+id/bt_account_updateDetail"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Update my detail" />
+            android:text="@string/update_my_detail" />
 
 
         <EditText

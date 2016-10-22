@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_commentItem_author"
-            android:text="Comment Author"
+            android:text="@string/comment_author"
             android:textStyle="bold"
             />
 
@@ -26,14 +26,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_commentItem_date"
             android:textSize="10sp"
-            android:text="Comment date"
+            android:text="@string/comment_date"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_commentItem_hour"
             android:textSize="10sp"
-            android:text="Comment hour"
+            android:text="@string/comment_hour"
             />
 
     </LinearLayout>
@@ -45,7 +45,7 @@
         android:id="@+id/tv_commentItem_text"
         android:paddingRight="5dp"
         android:paddingLeft="5dp"
-        android:text="Comment text"
+        android:text="@string/comment_text"
         android:gravity="left"
         android:layout_weight="1"
         />
