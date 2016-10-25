@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.caribou.yaweapp.ApiUrl.ListOfApiUrl;
+import com.caribou.yaweapp.FunctionClass;
 import com.caribou.yaweapp.PictureDetailActivity;
 import com.caribou.yaweapp.R;
 import com.caribou.yaweapp.adapter.ChatMessageArrayAdapter;
@@ -78,25 +79,18 @@ public class ChatFragment extends Fragment implements GetAsyncTask.GetAsyncTaskC
             @Override
             public void onClick(View view) {
                 String message = edMessage.getText().toString();
-                if (message.equals("")) {
-                    Toast.makeText(getContext(), R.string.message_empty, Toast.LENGTH_SHORT).show();
-                } else if (message.length() >= 200) {
-                    Toast.makeText(getContext(), R.string.not_more_200, Toast.LENGTH_SHORT).show();
-                } else {
 
+                if(FunctionClass.isNotToLongOrEmpty(message,200,getContext())) {
                     ChatMessage cm = new ChatMessage();
                     cm.setText(message);
                     cm.setPostDate(Calendar.getInstance().getTime());
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                     long idUser = prefs.getLong("id_user", 0);
                     cm.setId_user(idUser);
-
                     PostChatMessageAsyncTask task = new PostChatMessageAsyncTask();
                     task.execute(cm);
-
                     updateListView();
                     edMessage.setText("");
-
                 }
 
             }
