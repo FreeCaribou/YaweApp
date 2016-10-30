@@ -3,9 +3,6 @@ package com.caribou.yaweapp;
 import android.content.Context;
 import android.widget.Toast;
 
-/**
- * Created by caribou on 25/10/16.
- */
 
 public class FunctionClass {
 
