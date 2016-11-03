@@ -33,6 +33,27 @@
             android:text="@string/bla_bla_bla_bla"
             />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_home_forum"
+            android:text="Forum"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_home_wiki"
+            android:text="Wiki"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_home_metabattle"
+            android:text="Meta Battle"
+            />
+
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp" />
