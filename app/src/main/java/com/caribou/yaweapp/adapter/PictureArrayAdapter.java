@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class PictureArrayAdapter extends ArrayAdapter<Picture> implements GetAsyncTask.GetAsyncTaskCallback{
 
     String author;
-    TextView tvAuthor;
 
     public PictureArrayAdapter(Context context, ArrayList<Picture> pictures){
         super(context, 0,pictures);
@@ -38,7 +37,6 @@ public class PictureArrayAdapter extends ArrayAdapter<Picture> implements GetAsy
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.picture_list_item, parent, false);
         }
         // Lookup view for data population
-        tvAuthor = (TextView) convertView.findViewById(R.id.tv_item_author);
         TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_item_title);
         // Populate the data into the template view using the data object
 
@@ -57,8 +55,6 @@ public class PictureArrayAdapter extends ArrayAdapter<Picture> implements GetAsy
 
         GetAsyncTask task = new GetAsyncTask(PictureArrayAdapter.this);
         task.execute(ListOfApiUrl.getUrlUserById(String.valueOf(p.getId_user())));
-
-        tvAuthor.setText(author);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +86,6 @@ public class PictureArrayAdapter extends ArrayAdapter<Picture> implements GetAsy
             long jId = jsonObject.getLong("id");
             String jUsername = jsonObject.getString("name");
             author = jUsername;
-            tvAuthor.setText(jUsername);
         } catch (JSONException e) {
             e.printStackTrace();
         }
