@@ -38,6 +38,7 @@ import com.caribou.yaweapp.adapter.CommentArrayAdapter;
 import com.caribou.yaweapp.model.CommentPicture;
 import com.caribou.yaweapp.task.DeleteAsyncTask;
 import com.caribou.yaweapp.task.GetAsyncTask;
+import com.caribou.yaweapp.task.GetAsyncTaskAuthor;
 import com.caribou.yaweapp.task.PostCommentPictureAsyncTask;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +52,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class PictureDetailActivity extends AppCompatActivity implements GetAsyncTask.GetAsyncTaskCallback {
+public class PictureDetailActivity extends AppCompatActivity implements GetAsyncTask.GetAsyncTaskCallback, GetAsyncTaskAuthor.GetAsyncTaskAuthorCallback {
 
     TextView tvTitle;
     TextView tvAuthor;
@@ -69,6 +70,7 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
     long idUser;
     ArrayList<CommentPicture> listComments;
     LinearLayout ll;
+    String author;
 
 
     @Override
@@ -87,6 +89,7 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
 
         id = 0;
         imgUrl = "";
+        author = "";
         tvTitle = (TextView) findViewById(R.id.tv_pictureDetail_title);
         tvAuthor = (TextView) findViewById(R.id.tv_pictureDetail_author);
         tvDescription = (TextView) findViewById(R.id.tv_pictureDetail_descritpion);
@@ -99,13 +102,17 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
         final Bundle extra = this.getIntent().getExtras();
         if(extra != null){
             id = extra.getLong("id_picture");
+            Log.i("id picture", String.valueOf(id));
 
             GetAsyncTask task = new GetAsyncTask(PictureDetailActivity.this);
             task.execute(ListOfApiUrl.getUrlAllCommentPictureByIdPicture(String.valueOf(id)));
 
             tvTitle.setText(extra.getString("title_picture"));
             setTitle(extra.getString("title_picture"));
-            tvAuthor.setText(extra.getString("author_picture"));
+            idAuthor = extra.getLong("id_author");
+            GetAsyncTaskAuthor taskAuthor = new GetAsyncTaskAuthor(PictureDetailActivity.this);
+            taskAuthor.execute(ListOfApiUrl.getUrlUserById(String.valueOf(idAuthor)));
+
             tvDescription.setText(extra.getString("description_picture"));
 
             listComments = new ArrayList<>();
@@ -325,6 +332,19 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
 
     }
 
+    @Override
+    public void onPostGetAuthor(String sJSON) {
+        try {
+            JSONObject jsonObject = new JSONObject(sJSON);
+            long jId = jsonObject.getLong("id");
+            String jUsername = jsonObject.getString("name");
+            author = jUsername;
+            tvAuthor.setText(jUsername);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     //    public final static String APP_PATH_SD_CARD = "/YaweApp/";
 //
 //    public boolean saveImageToExternalStorage(Bitmap image) {
@@ -363,4 +383,8 @@ public class PictureDetailActivity extends AppCompatActivity implements GetAsync
 //            return false;
 //        }
 //    }
+
+
+
+
 }
